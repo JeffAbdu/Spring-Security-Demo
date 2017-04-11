@@ -5,7 +5,7 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Hello from public page!</h1>
+	<h1>Hello to Home!</h1>
 
 </body>
 </html>

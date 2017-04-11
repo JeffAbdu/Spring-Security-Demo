@@ -19,5 +19,10 @@ public class HomeController {
 	public String privatePage() {
 		return "privatePage";
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
 
 }
