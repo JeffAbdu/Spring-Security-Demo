@@ -31,5 +31,14 @@ public class HomeController {
 			return "login";
 		}
 
+		
+		@RequestMapping(value = "/loginFail", method = RequestMethod.GET)
+		public String loginFail(Model model) {
+			
+			System.out.println("Login fail handler running");
+			String errorMessage = "Oops, there was a problem loggin in.";
+			model.addAttribute("errorMessage", errorMessage);
+			return "login";
+		}
 
 }
