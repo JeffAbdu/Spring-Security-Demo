@@ -10,6 +10,10 @@
  
     <h1> Wlecome to this Demo apps custom Login Page</h1>
  
+    <!-- Displaying the model that comes from the controller -->
+    <p>${ randomMessageOfTheDay }</p>
+ 
+    <!-- Setting the login parameters: -->
     <form action="j_spring_security_check" name="myForm" method="POST">
       Whats your username?<input type="text" name="j_username" value="" />
       Whats your password?<input type="password" name="j_password" />

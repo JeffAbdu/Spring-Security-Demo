@@ -1,0 +1,136 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+  <!--  *************************** HTTP configuration ************************************************************* -->
+
+   <!-- HTTP Customization  -->
+   <security:http auto-config="true" use-expressions="true">
+    
+        
+    <security:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+         
+    <security:intercept-url pattern="/**" access="ROLE_USER" />
+
+    <security:form-login login-page="/login" login-processing-url="/j_spring_security_check.action" default-target-url="/home"/>
+
+      
+   </security:http>
+   
+
+
+   <!-- Spring default Http configuration 
+    Basic HTTP Authentication with Spring 	
+    
+            
+    <security:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+          
+    <security:form-login login-page="/login" default-target-url="/home"/>
+    
+   <security:http auto-config="true">
+      <security:intercept-url pattern="/**" access="ROLE_USER" />
+   </security:http>
+    -->
+
+  <!--  ***************************Authentication management ************************************************************* -->
+
+
+    <!--Code to provide settings for Spring Security in -Memory authentication: ******************************************     
+     <security:authentication-manager>
+         <security:authentication-provider>
+             <security:user-service>
+               <security:user name="ANDY" password="1234567" authorities="ROLE_USER"/>
+               <security:user name="ANN" password="7654321" authorities="ROLE_TRIAL_USER"/>
+             </security:user-service>
+         </security:authentication-provider>
+     </security:authentication-manager>    
+     
+     
+      -->
+ 
+  <!--  A minimal configuration approach to DB authentication: ****************************************** -->
+   
+   <security:authentication-manager>
+    <security:authentication-provider>
+      <!--  <security:password-encoder hash="md5"/> -->
+      <security:password-encoder ref="encoder" />       
+      <security:jdbc-user-service data-source-ref="dataSource"/>  
+    </security:authentication-provider>  
+   </security:authentication-manager>
+   
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+      <constructor-arg name="strength" value="11" />
+    </bean>
+  
+   <bean id="dataSource" class= "org.springframework.jdbc.datasource.DriverManagerDataSource" >
+     <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+     <property name="url" value="jdbc:mysql://localhost:3306/springdemodb" />
+     <property name="username" value="root"/>
+     <property name="password" value="1234"/>
+  </bean> 
+  
+
+
+   <!--Code to provide settings for Spring Security authentication users from Database: ******************************************
+   
+   
+  
+
+   <security:authentication-manager>
+      <security:authentication-provider user-service-ref="myUserDetailsService"/>  
+   </security:authentication-manager>
+  
+   <bean id="dataSource" class= "org.springframework.jdbc.datasource.DriverManagerDataSource" >
+     <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+     <property name="url" value="jdbc:mysql://localhost:3306/springdemodb" />
+     <property name="username" value="root"/>
+     <property name="password" value="1234"/>
+  </bean> 
+
+   The spring class that takes care of using the database connection in order to implement the security through database tables (users and authorities) 
+   <bean id="myUserDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+      <property name="dataSource" ref="dataSource"></property>
+   </bean>
+
+ -->
+
+<!-- The Authentication that was provided by the youtube video url: https://www.youtube.com/watch?v=QIwBHhiXHq   ************************
+        code provided in github:
+        
+        
+     <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">   
+        
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/admin/*"
+	access="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR') and hasIpAddress('0:0:0:0:0:0:0:1')" />
+	</http>
+  
+
+    in order to use: org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder:
+	<beans:import resource="servlet-context.xml" />
+
+    The encoder would encode the password, that would result password to have the value "admin"  
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder ref="encoder" />
+			<user-service>
+				<user name="admin"
+					password="$2a$12$cOqgJ6LE44ZmntyPTixH0OFi0/OUCW/6LB1R2quj3qluMvBFngS9u"
+					authorities="ROLE_ADMIN" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+-->
+
+</beans>

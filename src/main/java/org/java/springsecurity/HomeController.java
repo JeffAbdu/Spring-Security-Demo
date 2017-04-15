@@ -3,6 +3,7 @@ package org.java.springsecurity;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,9 +21,15 @@ public class HomeController {
 		return "privatePage";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
+		
+		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		public String login(Model model) {
+			
+			System.out.println("Login handler running");
+			String randomMessageOfTheDay = "Keep your head up!";
+			model.addAttribute("randomMessageOfTheDay", randomMessageOfTheDay);
+			return "login";
+		}
+
 
 }
