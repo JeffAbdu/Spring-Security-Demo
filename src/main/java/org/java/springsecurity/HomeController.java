@@ -40,5 +40,16 @@ public class HomeController {
 			model.addAttribute("errorMessage", errorMessage);
 			return "login";
 		}
+		
+		@RequestMapping(value = "/logout", method = RequestMethod.GET)
+		public String logout(Model model) {
+			
+			System.out.println("Logout handler running");
+			String logoutMessage = "Thanks for using the app. See you next time!";
+			model.addAttribute("logoutMessage", logoutMessage);
+			return "logout";
+		}
+		
+		
 
 }

@@ -7,9 +7,11 @@
 
 	<http auto-config="true" use-expressions="false">
 	     <intercept-url pattern='/login' access="IS_AUTHENTICATED_ANONYMOUSLY" />
-	     <intercept-url pattern='/loginFail' access="IS_AUTHENTICATED_ANONYMOUSLY" />	    
+	     <intercept-url pattern='/loginFail' access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	     <intercept-url pattern='/logout' access="IS_AUTHENTICATED_ANONYMOUSLY" />	    
 	     <intercept-url pattern="/**" access="ROLE_USER" />
-	     <form-login login-page='/login' default-target-url="/home" authentication-failure-url="/loginFail"/>	
+	     <form-login login-page='/login' default-target-url="/home" authentication-failure-url="/loginFail"/>
+	     <logout logout-success-url="/logout" />	
 	</http>
 
 
@@ -19,7 +21,7 @@
 
    <beans:bean id="dataSource" class= "org.springframework.jdbc.datasource.DriverManagerDataSource" >
      <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-     <beans:property name="url" value="jdbc:mysql://localhost:3306/springdemodb" />
+     <beans:property name="url" value="jdbc:mysql://localhost:3306/springtutorial" />
      <beans:property name="username" value="root"/>
      <beans:property name="password" value="1234"/>
   </beans:bean>	

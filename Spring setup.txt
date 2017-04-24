@@ -1,0 +1,47 @@
+
+- Install MySQL installer (mysql-installer-community-5.7.18.1) and MySQl work bench.
+- Install JDK: add the paths (C:\Program Files\Java\jdk1.8.0_131\bin)and(C:\Program Files\Java\jre1.8.0_131\bin) to the path of system variables.
+- Install sts.
+- Install maven:
+    -> Create a system veriable "JAVA_HOME=C:\Program Files\Java\jdk1.8.0_131"
+    -> Add the path (C:\Users\Abdenour\Documents\Dev-Env\maven\apache-maven-3.5.0\bin) to the path variable of system variables.
+- Download the server apache and add to sts as a server.
+
+
+
+-------------
+
+
+Set Up Database security tables: 
+
+
+
+CREATE TABLE `users` (
+  
+   `username` varchar(50) NOT NULL,
+ 
+  `password` varchar(60) NOT NULL,
+
+   `enabled` tinyint(1) NOT NULL,
+
+    PRIMARY KEY (`username`)
+) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `authorities` (
+  
+    `username` varchar(50) NOT NULL,
+  
+    `authority` varchar(50) NOT NULL,
+  
+     UNIQUE KEY `ix_auth_username` (`username`,`authority`),
+   
+  CONSTRAINT `fk_authorities_users` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+)
+    ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+ 
+- Set the name of the database within the security XML configuration as "springtutorial" instead of "springdemodb" which I used in the previous commits.
+

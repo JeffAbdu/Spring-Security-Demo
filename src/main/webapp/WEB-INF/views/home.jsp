@@ -11,8 +11,9 @@
 	<h1>Hello to Home!</h1>
 
     <!-- Using the Authentification Tag: -->
-   <p> Welcome <sec:authentication property="name" /> </p>
+    <p> Welcome <sec:authentication property="name" /> </p>
 
+    <a href=j_spring_security_logout>Logout</a>
   
     <!-- Using the Authorization Tag: -->
    <sec:authorize ifAnyGranted="ROLE_ADMIN">    
