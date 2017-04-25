@@ -8,7 +8,7 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Hello to Home!</h1>
+	<h1>Hello to the first  page!</h1>
 
     <!-- Using the Authentification Tag: -->
     <p> Welcome <sec:authentication property="name" /> </p>

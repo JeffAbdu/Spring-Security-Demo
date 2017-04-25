@@ -13,7 +13,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
 		System.out.println(request.getRemoteAddr());
-		return "home";
+		return "firstpage";
 	}
 
 	@RequestMapping(value = "/admin/privatePage", method = RequestMethod.GET)
@@ -48,6 +48,13 @@ public class HomeController {
 			String logoutMessage = "Thanks for using the app. See you next time!";
 			model.addAttribute("logoutMessage", logoutMessage);
 			return "logout";
+		}
+		
+		@RequestMapping(value = "/admins", method = RequestMethod.GET)
+		public String admin(Model model) {
+			
+			System.out.println("Admin handler running");
+			return "admins";
 		}
 		
 		
