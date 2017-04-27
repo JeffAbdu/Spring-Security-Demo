@@ -2,6 +2,7 @@ package org.java.springsecurity;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,15 @@ public class HomeController {
 			System.out.println("Admin handler running");
 			return "admins";
 		}
+		
+		
+		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		@RequestMapping(value = "/admins2", method = RequestMethod.GET)
+		public String admin2(Model model) {
+			
+			System.out.println("Admin2 handler running");
+			return "admins2";
+		}		
 		
 		
 

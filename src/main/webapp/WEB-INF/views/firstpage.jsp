@@ -18,6 +18,10 @@
 
    <br/>
    
+   <a href="admins2"> Admin page #2</a> 
+
+   <br/>
+   
     <a href=j_spring_security_logout>Logout</a>
   
     <!-- Using the Authorization Tag: -->
